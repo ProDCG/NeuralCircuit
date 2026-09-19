@@ -1,1 +1,0 @@
-// synaptic weights, delays, targets

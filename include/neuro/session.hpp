@@ -1,0 +1,1 @@
+// thread-safe command queue and circuit state

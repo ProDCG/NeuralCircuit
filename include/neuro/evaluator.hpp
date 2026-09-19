@@ -1,0 +1,1 @@
+// output rate/count decoders and truth tables
