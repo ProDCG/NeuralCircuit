@@ -1,0 +1,1 @@
+// SoA neuron states (v, u, chemicals, E/I types)
