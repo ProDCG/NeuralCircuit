@@ -55,6 +55,36 @@ namespace neuro {
 
         // accessors (span for safe zero-copy access)
         std::span<float> v() noexcept { return {v_.data(), count_}; }
+        std::span<const float> v() const noexcept { return {v_.data(), count_}; }
+
+        std::span<float> u() noexcept { return { u_.data(), count_}; }
+        std::span<const float> u() const noexcept { return { u_.data(), count_}; }
+
+        std::span<float> I_syn() noexcept { return {I_syn_.data(), count_}; }
+        std::span<float> I_ext() noexcept { return {I_ext_.data(), count_}; }
+        std::span<float> I_base() noexcept { return {I_base_.data(), count_}; }
+
+        std::span<const uint8_t> spiked() const noexcept { return {spiked_.data(), count_}; }
+        
+        // chemical and metabolic accessors
+        std::span<const float> C_trans() const noexcept { return {C_trans_.data(), count_}; }
+        std::span<const float> C_glc() const noexcept { return {C_glc_.data(), count_}; }
+        std::span<const float> metabolic_gate() const noexcept { return {metabolic_gate_.data(), count_}; }
+        std::span<const float> receptor_gain() const noexcept { return {receptor_gain_.data(), count_}; }
+
+        // parameters and metadata accessors
+        std::span<IzhikevichParams> izh_params() noexcept { return {izh_params_.data(), count_}; }
+        std::span<const IzhikevichParams> izh_params() const noexcept { return {izh_params_.data(), count_}; }
+
+        std::span<LocalChemParams> chem_params() noexcept { return {chem_params_.data(), count_}; }
+        std::span<const LocalChemParams> chem_params() const noexcept { return {chem_params_.data(), count_}; }
+
+        std::span<NeuronType> types() noexcept { return {types_.data(), count_}; }
+        std::span<const NeuronType> types() const noexcept { return {types_.data(), count_}; }
+
+        std::span<Vec3f> positions() noexcept { return {positions_.data(), count_}; }
+        std::span<const Vec3f> positions() const noexcept { return {positions_.data(), count_}; }
+
     private:
         size_t count_{0};
 
