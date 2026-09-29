@@ -5,7 +5,7 @@
 namespace neuro {
 
     SimulationEngine::SimulationEngine(float dt_ms, float dt_chem_ms)
-    : dt_(dt_ms), dt_chem_(dt_chem_ms), neurons_(1024), ring_buffer(1024, 400) {
+    : dt_(dt_ms), dt_chem_(dt_chem_ms), neurons_(1024), ring_buffer_(1024, 400) {
         set_dt(dt_ms);
     }
 
@@ -20,7 +20,7 @@ namespace neuro {
     }
 
     void SimulationEngine::reset() noexcept {
-        current_time_ms = 0.0f;
+        current_time_ms_ = 0.0f;
         total_steps_ = 0;
         chem_step_counter_ = 0;
         ring_buffer_.clear();
