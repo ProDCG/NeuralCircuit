@@ -175,6 +175,29 @@ namespace neuro {
         EngineTelemetry user_telemetry;
         user_telemetry.time_ms = raw_telemetry.time_ms;
         user_telemetry.step_count = raw_telemetry.step_count;
-        user_telemetry
+        user_telemetry.active_spikes_count = raw_telemetry.active_spikes_count;
+
+        user_telemetry.spiked_indices.reserve(raw_telemetry.spiked_indices.size());
+        for (uint32_t dense_idx : raw_telemetry.spiked_indices) {
+            auto it = dense_to_user_node_.find(dense_idx);
+            if (it != dense_to_user_node_.end()) {
+                user_telemetry.spiked_indices.push_back(it->second);
+            }
+        }
+
+        user_telemetry.sampled_voltages = std::move(raw_telemetry.sampled_voltages);
+        user_telemetry.sampled_transmitters = std::move(raw_telemetry.sampled_transmitters);
+        user_telemetry.sampled_glucose = std::move(raw_telemetry.sampled_glucose);
+
+        user_telemetry.output_decisions.reserve(raw_telemetry.output_decisions.size());
+        for (auto dec : raw_telemetry.output_decisions) {
+            auto it = dense_to_user_node_.find(dec.target_neuron_idx);
+            if (it != dense_to_user_node_.end()) {
+                dec.target_neuron_idx = it->second;
+                user_telemetry.output_decisions.push_back(dec);
+            }
+        }
+
+        return user_telemetry;
     }
-}
+} // namespace neuro
